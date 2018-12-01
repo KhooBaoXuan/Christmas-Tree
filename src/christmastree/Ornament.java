@@ -15,7 +15,7 @@ public class Ornament {
 
     public String hide() {
         this.ornament = false;
-        return "Ornament is off";
+        return "Ornament is off.";
     }
 
     public boolean isOrnament() {
