@@ -1,5 +1,7 @@
 package christmastree;
 
+import java.util.Iterator;
+
 public class RemoteControl {
     CommandList showCommands;
     CommandList hideCommands;
@@ -20,6 +22,24 @@ public class RemoteControl {
     public String showButtonPushed(int slot) {
         undoCommand = showCommands.getCommand(slot);
         return showCommands.getCommand(slot).execute();
+    }
+    
+    public String showAll () {
+        Iterator<Command> iter = showCommands.createIterator();
+        while(iter.hasNext()) {
+            Command c = iter.next();
+            c.execute();
+        }
+        return "All decorations are shown";
+    }
+    
+    public String hideAll () {
+        Iterator<Command> iter = hideCommands.createIterator();
+        while(iter.hasNext()) {
+            Command c = iter.next();
+            c.execute();
+        }
+        return "All decorations are hidden";
     }
 
     public String hideButtonPushed(int slot) {

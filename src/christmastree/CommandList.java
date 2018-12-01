@@ -1,5 +1,7 @@
 package christmastree;
 
+import java.util.Iterator;
+
 import java.util.ArrayList;
 
 public class CommandList{
@@ -15,5 +17,9 @@ public class CommandList{
 
     public void addCommand(Command command){
         commands.add(command);
+    }
+    
+    public Iterator<Command> createIterator() {
+        return commands.iterator();
     }
 }
