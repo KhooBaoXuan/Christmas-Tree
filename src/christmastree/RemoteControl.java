@@ -28,6 +28,6 @@ public class RemoteControl {
     }
 
     public String undoButtonPushed() {
-        return undoCommand.execute();
+        return undoCommand.undo();
     }
 }
