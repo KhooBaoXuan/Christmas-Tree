@@ -17,17 +17,17 @@ public class RemoteControl {
         hideCommands.addCommand(hideCommand);
     }
 
-    public void showButtonPushed(int slot) {
-        showCommands.getCommand(slot).execute();
+    public String showButtonPushed(int slot) {
         undoCommand = showCommands.getCommand(slot);
+        return showCommands.getCommand(slot).execute();
     }
 
-    public void hideButtonPushed(int slot) {
-        hideCommands.getCommand(slot).execute();
+    public String hideButtonPushed(int slot) {
         undoCommand = hideCommands.getCommand(slot);
+        return hideCommands.getCommand(slot).execute();
     }
 
-    public void undoButtonPushed() {
-        undoCommand.execute();
+    public String undoButtonPushed() {
+        return undoCommand.undo();
     }
 }
