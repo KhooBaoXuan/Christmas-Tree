@@ -4,5 +4,5 @@ public interface Command {
 
     public String execute();
 
-    public void undo();
+    public String undo();
 }
