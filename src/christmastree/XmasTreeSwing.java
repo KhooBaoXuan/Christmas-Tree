@@ -31,13 +31,18 @@ public class XmasTreeSwing extends JFrame implements ActionListener {
    private boolean presents = false;
    private boolean ornaments = false;
    private boolean lights = false;
- 
-   public XmasTreeSwing() {
-       
-       //Set title
-       setTitle("Decorate the Christmas tree!");
-       setLayout(new BorderLayout());
-
+   
+   public void setupChristmasTree() {
+       setupTitle();
+       setupImage();
+       setupButtonLabel();
+       setupInfoPanel();
+       setupButton();
+       setupPanel();
+       setupFrame();
+   }
+   
+   public void setupTitle() {
        //Setting the title of the JLabel
        title = new JLabel("Click on the button to add the adornment to the tree.");
 
@@ -54,7 +59,9 @@ public class XmasTreeSwing extends JFrame implements ActionListener {
 
        //Setting colour of title panel
        titlePanel.setBackground(Color.white);
-
+   }
+   
+   public void setupImage() {
        //Creating a new JPanel for the image to go
        imagePanel = new JPanel();
 
@@ -70,7 +77,16 @@ public class XmasTreeSwing extends JFrame implements ActionListener {
 
        //Setting colour of image panel
        imagePanel.setBackground(Color.white);
-
+   }
+   
+   public void setupInfoPanel() {
+       //Info panel
+       infoPanel = new JPanel();
+       infoPanel.add(buttonLabel);
+       infoPanel.setBackground(Color.white);
+   }
+   
+   public void setupButtonLabel() {
        //Creating a new JPanel for the buttons to go
        buttonPanel = new JPanel();
 
@@ -84,12 +100,9 @@ public class XmasTreeSwing extends JFrame implements ActionListener {
        buttonLabel.setForeground(Color.red);
        buttonLabel.setHorizontalAlignment(SwingConstants.CENTER);
        buttonLabel.setBackground(Color.white);
-
-       //Info panel
-       infoPanel = new JPanel();
-       infoPanel.add(buttonLabel);
-       infoPanel.setBackground(Color.white);
-
+   }
+   
+   public void setupButton() {
        //Naming buttons
        lightButton = new JButton("Lights");
        presentButton = new JButton("Presents");
@@ -124,26 +137,39 @@ public class XmasTreeSwing extends JFrame implements ActionListener {
        buttonPanel.add(presentButton);
        buttonPanel.add(addAllButton);
        buttonPanel.add(exitButton);
-
        //Enable buttons to listen for a mouse-click
        lightButton.addActionListener(this);
        ornamentButton.addActionListener(this);
        presentButton.addActionListener(this);
        addAllButton.addActionListener(this);
        exitButton.addActionListener(this);
-
+   }
+   
+   public void setupPanel() {
        //Positioning Panels
        add(titlePanel, BorderLayout.NORTH);
        add(imagePanel, BorderLayout.CENTER);
        imagePanel.add(infoPanel, BorderLayout.NORTH);
        add(buttonPanel, BorderLayout.SOUTH);
-
+   }
+   
+   public void setupFrame() {
        //Configure the frame
        getContentPane().setBackground(Color.white);
        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        setSize(500, 650);
        setLocation(300,40);
        setVisible(true);
+   }
+ 
+   public XmasTreeSwing() {
+       
+       //Set title
+       setTitle("Decorate the Christmas tree!");
+       setLayout(new BorderLayout());
+
+       setupChristmasTree();
+    
    }//Constructor
  
    public void paint(Graphics g) {
