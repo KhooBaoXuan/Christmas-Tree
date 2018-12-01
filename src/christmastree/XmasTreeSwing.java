@@ -28,6 +28,13 @@ public class XmasTreeSwing extends JFrame implements ActionListener {
 //   private boolean ornaments = true;
 //   private boolean lights = true;
    
+    private static RemoteControl rc;
+    private static CommandHistory ch;
+      
+    private static Light light;
+    private static Ornament ornament;
+    private static Present present;
+   
    private boolean presents = false;
    private boolean ornaments = false;
    private boolean lights = false;
@@ -172,67 +179,77 @@ public class XmasTreeSwing extends JFrame implements ActionListener {
     
    }//Constructor
  
+   public void drawLights(Graphics g) {
+    //draw lights
+     g.setColor(Color.white);
+
+     //middle lights
+     g.fillOval(250,190,10,10);
+     g.fillOval(250,260,10,10);
+     g.fillOval(250,350,10,10);
+     g.fillOval(250,430,10,10);
+
+     //left lights
+     g.fillOval(200,260,10,10);
+     g.fillOval(180,350,10,10);
+     g.fillOval(160,430,10,10);
+
+     //right lights
+     g.fillOval(300,260,10,10);
+     g.fillOval(330,350,10,10);
+     g.fillOval(340,430,10,10);
+   }
+   
+   public void drawOrnaments (Graphics g) {
+        //draw ornaments
+      g.setColor(Color.red);
+      g.fillOval(220,220,15,15);
+      g.fillOval(280,220,15,15);
+      g.setColor(Color.blue);
+      g.fillOval(320,380,15,15);
+      g.fillOval(180,380,15,15);
+      g.setColor(Color.cyan);
+      g.fillOval(200,300,15,15);
+      g.fillOval(300,300,15,15);
+   }
+   
+   public void drawPresents (Graphics g) {
+       //draw presents
+        g.setColor(Color.red);
+     //   g.fillRect(320,500,60,60);
+    //    g.fillRect(140,480,30,30);
+        g.fillRect(320,400,60,60);
+        g.fillRect(140,380,30,30);
+
+        g.setColor(Color.orange);
+     //   g.fillRect(180,530,40,40);
+           g.fillRect(180,430,40,40);
+
+        g.setColor(Color.blue);
+    //     g.fillRect(120,500,60,60);
+     //   g.fillRect(360,540,30,30);
+
+           g.fillRect(120,400,60,60);
+        g.fillRect(360,440,30,30);
+   }
+   
    public void paint(Graphics g) {
       //Call the paint method of the superclass
       super.paint(g);
  
       if(lights)
       {
-         //draw lights
-         g.setColor(Color.white);
- 
-         //middle lights
-         g.fillOval(250,190,10,10);
-         g.fillOval(250,260,10,10);
-         g.fillOval(250,350,10,10);
-         g.fillOval(250,430,10,10);
- 
-         //left lights
-         g.fillOval(200,260,10,10);
-         g.fillOval(180,350,10,10);
-         g.fillOval(160,430,10,10);
- 
-         //right lights
-         g.fillOval(300,260,10,10);
-         g.fillOval(330,350,10,10);
-         g.fillOval(340,430,10,10);
- 
+         drawLights(g);
       }//if lights
  
       if(ornaments)
       {
-         //draw ornaments
-         g.setColor(Color.red);
-         g.fillOval(220,220,15,15);
-         g.fillOval(280,220,15,15);
-         g.setColor(Color.blue);
-         g.fillOval(320,380,15,15);
-         g.fillOval(180,380,15,15);
-         g.setColor(Color.cyan);
-         g.fillOval(200,300,15,15);
-         g.fillOval(300,300,15,15);
- 
+         drawOrnaments(g);
       }//if ornaments
  
       if(presents)
       {
-         //draw presents
-         g.setColor(Color.red);
-      //   g.fillRect(320,500,60,60);
-     //    g.fillRect(140,480,30,30);
-         g.fillRect(320,400,60,60);
-         g.fillRect(140,380,30,30);
- 
-         g.setColor(Color.orange);
-      //   g.fillRect(180,530,40,40);
-            g.fillRect(180,430,40,40);
- 
-         g.setColor(Color.blue);
-    //     g.fillRect(120,500,60,60);
-      //   g.fillRect(360,540,30,30);
-         
-            g.fillRect(120,400,60,60);
-         g.fillRect(360,440,30,30);
+         drawPresents(g);
  
       }//if presents
  
@@ -244,36 +261,35 @@ public class XmasTreeSwing extends JFrame implements ActionListener {
  
       if(event.getSource()==lightButton)
       {
-         ornaments = false;
-         presents = false;
-         lights = true;
+          toggleLight();
+         lights = light.isLight();
          repaint();
  
       }//if light
  
       else if(event.getSource()==ornamentButton)
       {
-         lights = false;
-         presents = false;
-         ornaments = true;
+          toggleOrnament();
+         ornaments = ornament.isOrnament();
          repaint();
  
       }//if ornament
  
       else if(event.getSource()==presentButton)
       {
-         lights = false;
-         ornaments = false;
-         presents = true;
+          togglePresent();
+         presents = present.isPresent();
          repaint();
  
       }//if present
  
       else if(event.getSource()==addAllButton)
       {
-         lights = true;
-         ornaments = true;
-         presents = true;
+        toggleAllTrue();
+          
+         lights = light.isLight();
+         ornaments = ornament.isOrnament();
+         presents = present.isPresent();
          repaint();
       }//if add all
  
@@ -284,11 +300,74 @@ public class XmasTreeSwing extends JFrame implements ActionListener {
       }//else exit
  
    } //actionPerformed
+   
+   public void toggleLight () {
+       String log = "";
+       if (!light.isLight()) {
+           log = rc.showButtonPushed(0);
+       } else {
+           log = rc.hideButtonPushed(0);
+       }
+       ch.log(log);
+   }
+   
+   public void toggleOrnament () {
+       String log = "";
+       if (!ornament.isOrnament()) {
+           log = rc.showButtonPushed(1);
+       } else {
+           log = rc.hideButtonPushed(1);
+       }
+       ch.log(log);
+   }
+   
+   public void togglePresent () {
+       String log = "";
+       if (!present.isPresent()) {
+           log = rc.showButtonPushed(2);
+       } else {
+           log = rc.hideButtonPushed(2);
+       }
+       ch.log(log);
+   }
+   
+   public void toggleAllTrue () {
+       if (light.isLight() &&
+         ornament.isOrnament() &&
+         present.isPresent()) {
+        rc.hideButtonPushed(0);
+        rc.hideButtonPushed(1);
+        rc.hideButtonPushed(2);  
+        ch.log("All decorations are hidden");
+       } else {
+        rc.showButtonPushed(0);
+        rc.showButtonPushed(1);
+        rc.showButtonPushed(2);
+        ch.log("All decorations are shown");
+       }
+   }
  
    public static void main(String[] args)
    {
       XmasTreeSwing gui = new XmasTreeSwing();
- 
+      
+      rc = new RemoteControl();
+      ch = CommandHistory.getInstance();
+      
+      light = new Light();
+      ornament = new Ornament();
+      present = new Present();
+      
+      LightShowCommand lsc = new LightShowCommand(light);
+      LightHideCommand lhc = new LightHideCommand(light);
+      OrnamentShowCommand osc = new OrnamentShowCommand(ornament);
+      OrnamentHideCommand ohc = new OrnamentHideCommand(ornament);
+      PresentShowCommand psc = new PresentShowCommand(present);
+      PresentHideCommand phc = new PresentHideCommand(present);
+      
+      rc.setCommand(lsc, lhc);
+      rc.setCommand(osc, ohc);
+      rc.setCommand(psc, phc);
    }//main
  
 }//class

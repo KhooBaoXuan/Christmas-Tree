@@ -3,7 +3,7 @@ package christmastree;
 public class Light {
     boolean light;
 
-    public Light(boolean light){
+    public Light(){
         this.light = false;
     }
 
