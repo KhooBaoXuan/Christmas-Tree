@@ -3,7 +3,7 @@ package christmastree;
 public class Present {
     boolean present;
 
-    public Present(boolean present){
+    public Present(){
         this.present = false;
     }
 
