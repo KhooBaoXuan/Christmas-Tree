@@ -6,18 +6,21 @@ import java.util.Iterator;
 public class CommandIterator implements Iterator{
 
     ArrayList<Command> commands;
-
-    public Iterator<Command> getIterator() {
-        return commands.iterator();
+    int position = 0;
+    
+    public CommandIterator(ArrayList<Command> commands){
+        this.commands = commands;
     }
 
     @Override
     public boolean hasNext() {
-        return false;
+        return !(position >= commands.size() || commands.get(position) == null);
     }
 
     @Override
-    public Object next() {
-        return null;
+    public Command next() {
+        Command command = commands.get(position);
+        position++;
+        return command;
     }
 }
