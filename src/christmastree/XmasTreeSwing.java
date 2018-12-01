@@ -332,19 +332,15 @@ public class XmasTreeSwing extends JFrame implements ActionListener {
    }
    
    public void toggleAllTrue () {
+       String log = "";
        if (light.isLight() &&
          ornament.isOrnament() &&
          present.isPresent()) {
-        rc.hideButtonPushed(0);
-        rc.hideButtonPushed(1);
-        rc.hideButtonPushed(2);  
-        ch.log("All decorations are hidden");
+        log = rc.hideAll();
        } else {
-        rc.showButtonPushed(0);
-        rc.showButtonPushed(1);
-        rc.showButtonPushed(2);
-        ch.log("All decorations are shown");
+        log = rc.showAll();
        }
+       ch.log(log);
    }
  
    public static void main(String[] args)
