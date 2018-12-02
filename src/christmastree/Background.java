@@ -27,8 +27,8 @@ import javax.swing.SwingConstants;
 
 public class Background extends JLabel implements Observer {
     private Subject dateTimeReader;
-    private ImageIcon day = new ImageIcon(getClass().getResource("day.jpg"));
-    private ImageIcon night = new ImageIcon(getClass().getResource("night.jpg"));
+    private ImageIcon day = new ImageIcon(getClass().getResource("Xmastree day.jpg"));
+    private ImageIcon night = new ImageIcon(getClass().getResource("Xmastree night.jpg"));
     
     int dayTime = 0;
     int nightTime = 1;    
