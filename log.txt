@@ -14,3 +14,34 @@
 2018-12-01 18:47:18.924: The present is off
 2018-12-01 18:47:20.233: Ornament is off.
 2018-12-01 18:47:20.784: The light is off.
+2018-12-05 12:27:18.883: Ornament is on.
+2018-12-05 12:27:19.747: The light is on.
+2018-12-05 12:27:20.783: Ornament is off.
+2018-12-05 12:27:21.658: The present is on.
+2018-12-05 12:27:22.622: All decorations are shown
+2018-12-05 12:28:07.859: Ornament is on.
+2018-12-05 12:28:08.461: The light is on.
+2018-12-05 12:28:09.548: The present is on.
+2018-12-05 12:28:10.15: All decorations are hidden
+2018-12-05 12:29:25.18: Ornament is on.
+2018-12-05 12:29:26.414: The present is on.
+2018-12-05 12:29:27.817: All decorations are shown
+2018-12-05 12:30:37.945: Ornament is on.
+2018-12-05 12:30:39.904: The light is on.
+2018-12-05 12:30:40.701: Ornament is off.
+2018-12-05 12:30:41.432: The present is on.
+2018-12-05 12:30:42.185: All decorations are shown
+2018-12-05 12:32:13.116: The light is on.
+2018-12-05 12:34:45.063: Ornament is on.
+2018-12-05 12:34:46.082: The present is on.
+2018-12-05 12:34:46.614: Ornament is off.
+2018-12-05 12:34:47.132: The light is on.
+2018-12-05 12:34:48.234: All decorations are shown
+2018-12-05 12:37:45.757: The light is on.
+2018-12-05 12:37:46.429: Ornament is on.
+2018-12-05 12:37:55.82: Ornament is off.
+2018-12-05 12:37:57.368: The present is on.
+2018-12-05 12:41:53.073: The light is on.
+2018-12-05 12:41:55.226: Ornament is on.
+2018-12-05 12:41:56.414: The present is on.
+2018-12-05 12:41:57.522: All decorations are hidden

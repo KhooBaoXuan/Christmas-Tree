@@ -12,6 +12,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Properties;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,35 +27,25 @@ import javax.swing.SwingConstants;
  */
 
 public class Background extends JLabel implements Observer {
-    private Subject dateTimeReader;
+    private DateTimeReader dateTimeReader;
+    
     private ImageIcon day = new ImageIcon(getClass().getResource("Xmastree day.jpg"));
+    private ImageIcon sunrise = new ImageIcon(getClass().getResource("Xmastree sunrise.jpg"));
+    private ImageIcon sunset = new ImageIcon(getClass().getResource("Xmastree sunset.jpg"));
     private ImageIcon night = new ImageIcon(getClass().getResource("Xmastree night.jpg"));
-    
-    int dayTime = 0;
-    int nightTime = 1;    
-    int sunset = 2;
-    int sunrise = 3;
-    
+
     long curTime = 0;
     
-    public Background(Subject dateTimeReader){
+    public Background(DateTimeReader dateTimeReader){
         this.dateTimeReader = dateTimeReader;
         dateTimeReader.registerObserver(this);
-        if(curTime%2==0){
-            this.setIcon(day);
-        }else{
-            this.setIcon(night);
-        }
+        long time = System.currentTimeMillis();
+        this.dateTimeReader.setTime(time);
     }
     
     @Override
     public void update(long time) {
         this.curTime = time;
-//        if(curTime%2==0){
-//            this.setIcon(day);
-//        }else{
-//            this.setIcon(night);
-//        }
         System.out.println("curtime: "+time);
         updateBackground();
     }
@@ -65,16 +56,17 @@ public class Background extends JLabel implements Observer {
             p.load(ClassLoader.getSystemResourceAsStream("christmas.properties"));
             String bgDesign = p.getProperty("Background");
             System.out.println(bgDesign);
+            
             if(bgDesign.equals("DAY")){
                 this.setIcon(day);
             }else if(bgDesign.equals("SUNRISE")){
-                
+                this.setIcon(sunrise);
             }else if(bgDesign.equals("SUNSET")){
-                
+                this.setIcon(sunset);
             }else{
                 this.setIcon(night);
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("Error in properties file");
         }
     }
