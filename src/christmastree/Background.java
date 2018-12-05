@@ -1,25 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package christmastree;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Properties;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 /**
  *
@@ -28,47 +12,90 @@ import javax.swing.SwingConstants;
 
 public class Background extends JLabel implements Observer {
     private DateTimeReader dateTimeReader;
-    
-    private ImageIcon day = new ImageIcon(getClass().getResource("Xmastree day.jpg"));
-    private ImageIcon sunrise = new ImageIcon(getClass().getResource("Xmastree sunrise.jpg"));
-    private ImageIcon sunset = new ImageIcon(getClass().getResource("Xmastree sunset.jpg"));
-    private ImageIcon night = new ImageIcon(getClass().getResource("Xmastree night.jpg"));
+      
+    private BackgroundState bgDayState = new BackgroundDayState(this);
+    private BackgroundState bgSunriseState;
+    private BackgroundState bgSunsetState;
+    private BackgroundState bgNightState;
+
+    private BackgroundState bgState;
+    private String bgProperty;
 
     long curTime = 0;
     
     public Background(DateTimeReader dateTimeReader){
+        bgDayState = new BackgroundDayState(this);
+        bgSunriseState = new BackgroundSunriseState(this);
+        bgSunsetState = new BackgroundSunsetState(this);
+        bgNightState = new BackgroundNightState(this);
+                
         this.dateTimeReader = dateTimeReader;
         dateTimeReader.registerObserver(this);
-        long time = System.currentTimeMillis();
+        updateBgProperty();
+        bgState = BackgroundState.InitialState(this);
+        long time = System.currentTimeMillis();        
         this.dateTimeReader.setTime(time);
+    }
+
+    public BackgroundState getBgDayState() {
+        return bgDayState;
+    }
+
+    public BackgroundState getBgSunriseState() {
+        return bgSunriseState;
+    }
+
+    public BackgroundState getBgSunsetState() {
+        return bgSunsetState;
+    }
+
+    public BackgroundState getBgNightState() {
+        return bgNightState;
+    }
+
+    public BackgroundState getBgState() {
+        return bgState;
+    }
+
+    public void setBgState(BackgroundState bgState) {
+        this.bgState = bgState;
+    }
+
+    public void setBgProperty(String bgProperty) {
+        this.bgProperty = bgProperty;
+    }
+
+    public String getBgProperty() {
+        return bgProperty;
     }
     
     @Override
     public void update(long time) {
         this.curTime = time;
         System.out.println("curtime: "+time);
-        updateBackground();
+        updateBgProperty();
+        refresh();
     }
     
-    public void updateBackground(){
+    //*******Note: Read properties suppose in DateTimeReader(Subject) class)?
+    private void updateBgProperty(){
         Properties p = new Properties();
         try {
             p.load(ClassLoader.getSystemResourceAsStream("christmas.properties"));
-            String bgDesign = p.getProperty("Background");
-            System.out.println(bgDesign);
-            
-            if(bgDesign.equals("DAY")){
-                this.setIcon(day);
-            }else if(bgDesign.equals("SUNRISE")){
-                this.setIcon(sunrise);
-            }else if(bgDesign.equals("SUNSET")){
-                this.setIcon(sunset);
-            }else{
-                this.setIcon(night);
-            }
+            bgProperty = p.getProperty("Background");
+            System.out.println(bgProperty);
         } catch (IOException e) {
             System.out.println("Error in properties file");
-        }
+        }        
+    }
+
+    public void refresh(){
+        bgState.refresh();
+        refreshUI();
+    }
+    
+    private void refreshUI(){
+        this.setIcon(bgState.getImage());
     }
 
 }
