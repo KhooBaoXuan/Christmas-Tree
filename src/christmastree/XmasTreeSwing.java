@@ -73,7 +73,7 @@ public class XmasTreeSwing extends JFrame implements ActionListener {
        imagePanel = new JPanel();
 
        //Retrieving image from the file
-       image = new ImageIcon(getClass().getResource("tree1.jpg"));
+       image = new ImageIcon(getClass().getResource("Xmastree day.jpg"));
 
 
        //Adding the image to a label

@@ -74,7 +74,7 @@ public class ObserverDriver extends JFrame implements ActionListener {
 //       imagePanel.add(background);
        
        //Retrieving image from the file
-       image = new ImageIcon(getClass().getResource("tree1.jpg"));
+       image = new ImageIcon(getClass().getResource("Xmastree day.jpg"));
 
        
 
@@ -158,7 +158,7 @@ public class ObserverDriver extends JFrame implements ActionListener {
        //Configure the frame
        getContentPane().setBackground(Color.white);
        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       setSize(500, 650);
+       setSize(600, 720);
        setLocation(300,40);
        setVisible(true);
    }//Constructor
@@ -173,20 +173,20 @@ public class ObserverDriver extends JFrame implements ActionListener {
          g.setColor(Color.white);
  
          //middle lights
-         g.fillOval(250,190,10,10);
-         g.fillOval(250,260,10,10);
-         g.fillOval(250,350,10,10);
-         g.fillOval(250,430,10,10);
+         g.fillOval(290,190,10,10);
+         g.fillOval(290,300,10,10);
+         g.fillOval(290,400,10,10);
+         g.fillOval(290,500,10,10);
  
          //left lights
-         g.fillOval(200,260,10,10);
-         g.fillOval(180,350,10,10);
-         g.fillOval(160,430,10,10);
+         g.fillOval(250,300,10,10);
+         g.fillOval(230,400,10,10);
+         g.fillOval(210,500,10,10);
  
          //right lights
-         g.fillOval(300,260,10,10);
-         g.fillOval(330,350,10,10);
-         g.fillOval(340,430,10,10);
+         g.fillOval(330,300,10,10);
+         g.fillOval(350,400,10,10);
+         g.fillOval(370,500,10,10);
  
       }//if lights
  
@@ -194,14 +194,14 @@ public class ObserverDriver extends JFrame implements ActionListener {
       {
          //draw ornaments
          g.setColor(Color.red);
-         g.fillOval(220,220,15,15);
-         g.fillOval(280,220,15,15);
+         g.fillOval(310,260,15,15);
+         g.fillOval(270,260,15,15);
          g.setColor(Color.blue);
-         g.fillOval(320,380,15,15);
-         g.fillOval(180,380,15,15);
+         g.fillOval(320,350,15,15);
+         g.fillOval(260,350,15,15);
          g.setColor(Color.cyan);
-         g.fillOval(200,300,15,15);
-         g.fillOval(300,300,15,15);
+         g.fillOval(330,450,15,15);
+         g.fillOval(250,450,15,15);
  
       }//if ornaments
  
@@ -211,19 +211,19 @@ public class ObserverDriver extends JFrame implements ActionListener {
          g.setColor(Color.red);
       //   g.fillRect(320,500,60,60);
      //    g.fillRect(140,480,30,30);
-         g.fillRect(320,400,60,60);
-         g.fillRect(140,380,30,30);
+         g.fillRect(350,600,60,60);
+         g.fillRect(170,580,30,30);
  
          g.setColor(Color.orange);
       //   g.fillRect(180,530,40,40);
-            g.fillRect(180,430,40,40);
+            g.fillRect(210,630,40,40);
  
          g.setColor(Color.blue);
     //     g.fillRect(120,500,60,60);
       //   g.fillRect(360,540,30,30);
          
-            g.fillRect(120,400,60,60);
-         g.fillRect(360,440,30,30);
+            g.fillRect(150,600,60,60);
+         g.fillRect(390,640,30,30);
  
       }//if presents
  
