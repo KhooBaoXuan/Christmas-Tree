@@ -6,7 +6,9 @@
 
 package christmastree;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Properties;
 
 /**
  *
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 public class DateTimeReader implements Subject {
     private ArrayList<Observer> observers;
     public long time;
+    public String period;
     
     public DateTimeReader(){
         observers = new ArrayList<Observer>();
@@ -24,6 +27,7 @@ public class DateTimeReader implements Subject {
     @Override
     public void registerObserver(Observer obs) {
         observers.add(obs);
+        timeChanged();
     }
 
     @Override
@@ -37,8 +41,21 @@ public class DateTimeReader implements Subject {
     @Override
     public void notifyObserver() {
         for(Observer obs:observers){
-            obs.update(time);
+            obs.update(time, period);
         }
+    }
+    
+    public String getPeriod() {
+        Properties p = new Properties();
+        String bgProperty = "";
+        try {
+            p.load(ClassLoader.getSystemResourceAsStream("christmas.properties"));
+            bgProperty = p.getProperty("Background");
+            System.out.println(bgProperty);
+        } catch (IOException e) {
+            System.out.println("Error in properties file");
+        }    
+        return bgProperty;
     }
 
     public void setTime(long time){
@@ -46,7 +63,12 @@ public class DateTimeReader implements Subject {
         timeChanged();
     }
     
+    public void setPeriod () {
+        this.period = this.getPeriod();
+    }
+    
     public void timeChanged(){
+        setPeriod();
         notifyObserver();
     }
 }

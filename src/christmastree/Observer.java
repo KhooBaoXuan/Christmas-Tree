@@ -10,5 +10,5 @@ package christmastree;
  * @author Kee Aun
  */
 public interface Observer {
-    public void update(long time);
+    public void update(long time, String period);
 }
