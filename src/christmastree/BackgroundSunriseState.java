@@ -21,10 +21,10 @@ public class BackgroundSunriseState extends BackgroundState {
         
         if(bgProperty.equals("SUNRISE")){
             // do nothing
-        }else if(bgProperty.equals("SUNSET")){
-            background.setBgState(background.getBgSunsetState());
+        }else if(bgProperty.equals("DAY")){
+            background.setBgState(background.getBgDayState());
         }else{
-            System.err.println("Follow the sequence DAY->SUNRISE->SUNSET->NIGHT");
+            System.err.println("Follow the sequence SUNRISE->DAY->SUNSET->NIGHT");
             throw new UnsupportedOperationException("Not support yet");        
         }
     }
