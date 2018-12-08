@@ -31,7 +31,6 @@ public class Background extends JLabel implements Observer {
                 
         this.dateTimeReader = dateTimeReader;
         dateTimeReader.registerObserver(this);
-        updateBgProperty();
         bgState = BackgroundState.InitialState(this);
         long time = System.currentTimeMillis();        
         this.dateTimeReader.setTime(time);
@@ -70,23 +69,14 @@ public class Background extends JLabel implements Observer {
     }
     
     @Override
-    public void update(long time) {
+    public void update(long time, String period) {
         this.curTime = time;
+        this.bgProperty = period;
         System.out.println("curtime: "+time);
-        updateBgProperty();
-        refresh();
-    }
-    
-    //*******Note: Read properties suppose in DateTimeReader(Subject) class)?
-    private void updateBgProperty(){
-        Properties p = new Properties();
-        try {
-            p.load(ClassLoader.getSystemResourceAsStream("christmas.properties"));
-            bgProperty = p.getProperty("Background");
-            System.out.println(bgProperty);
-        } catch (IOException e) {
-            System.out.println("Error in properties file");
-        }        
+        System.out.println("period: " + bgProperty);
+        if (bgState != null) {
+            refresh();
+        }
     }
 
     public void refresh(){
